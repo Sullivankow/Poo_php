@@ -47,7 +47,7 @@ $arthur = new Personnage('Arthur',100,  80,  10, 100);
 // autre perso perd la diff entre attack merlin et sa défense (cas ci dessus arthur - 10 de vie donc vie = 90)
 // sinon c'est merlin qui perd la diff entre défense autre et attaque merlin
 
-// pensé multiplcateur attacke défense de 1.2 par level
+// pensé multiplcateur attacke défense de 1.2 par level (ex: $this->level * 1.2)
 
 /*$merlin->attack($arthur);*/
 
