@@ -1,44 +1,9 @@
 <?php
 
-function createPersonnage(string $name, int $level, int $health, int $attack, int $defense) {
-    $name = ucfirst($name);
-
-    if ($level > 100) {
-        $level = 100;
-    }
-    if ($health > 100) {
-        $health = 100;
-    }
-
-    return [
-        'name' => $name,
-        'level' => $level,
-        'health' => $health,
-        'attack' => $attack,
-        'defense' => $defense,
-    ];
-}
-
-function reduceHealth(array $pesronnage, int $health) {
-    $pesronnage['health'] -= $health;
-
-    return $pesronnage;
-}
-
-$personnage = createPersonnage('Merlin', 10, 100, 2, 80);
-
-/*echo $personnage['name']."\r\n";
-echo $personnage['health']."\r\n";*/
-
-$personnage = reduceHealth($personnage, 20);
-
-/*echo $personnage['health'];*/
-
-////// OBJECT
 
 require_once 'Personnage.php';
 
-$merlin = new Personnage('Merlin',100, 20, 80);
+$merlin = new Personnage('Merlin',100, 5, 80);
 $arthur = new Personnage('Arthur',100,  80,  10, 100);
 
 // but prochain live
@@ -54,5 +19,22 @@ $arthur = new Personnage('Arthur',100,  80,  10, 100);
 echo $merlin->getHealth()."\r\n";
 echo $arthur->getHealth()."\r\n";
 
+echo 'Merlin attaque Arthur'."\r\n";
+$merlin->attack($arthur);
+
+echo $merlin->getHealth()."\r\n";
+echo $arthur->getHealth()."\r\n";
+
+echo "\r\n";
+echo "\r\n";
+
+echo $merlin->getLevel()."\r\n";
+echo $arthur->getLevel()."\r\n";
+
+echo "\r\n";
+echo "\r\n";
+
+echo $merlin->getWinCombat()."\r\n";
+echo $arthur->getWinCombat()."\r\n";
 
 /*echo $personnage->getHealth()."\r\n";*/

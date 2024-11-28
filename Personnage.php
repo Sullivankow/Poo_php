@@ -4,28 +4,39 @@ class Personnage
 {
     private int $winCombat = 0;
 
+    private const MIN_HEALTH = 10;
+    private const MIN_LEVEL = 1;
+    private const MAX_LEVEL = 100;
+
+    public const ATTACK_ACTION_KEY = 'attack';
+    private const DEFENSE_ACTION_KEY = 'attack';
+
     public function __construct(
         private string $name,
         private int $health,
         private int $attack,
         private int $defense,
-        private int $level = 1,
+        private int $level = self::MIN_LEVEL,
     ) {
     }
 
-    public function reduceHealth(int $health)
+    public function attack(Personnage $enemy): void
     {
-        $this->health -= $health;
-    }
+        // $this win combat
+        if ($this->attack > $enemy->getDefense()) {
+            $enemy->setHealth($enemy->getHealth() - ($this->attack - $enemy->getDefense()));
+            $this->increaseLevel(self::ATTACK_ACTION_KEY);
+            $enemy->decreaseLevel();
 
-    public function attack(string $name)
-    {
-        $enemyDefense = rand(0, 100);
-
-        if ($this->attack > $enemyDefense) {
-            $this->level++;
+            $this->increaseWinCombat();
+            $enemy->decreaseWinCombat();
         } else {
-            $this->level--;
+            $this->setHealth($this->getHealth() - ($enemy->getDefense() - $this->attack));
+            $this->decreaseLevel();
+            $enemy->increaseLevel(self::DEFENSE_ACTION_KEY);
+
+            $this->decreaseWinCombat();
+            $enemy->increaseWinCombat();
         }
     }
 
@@ -51,7 +62,7 @@ class Personnage
 
     public function setHealth(int $health): self
     {
-        $this->health = $health;
+        $this->health = $health < self::MIN_HEALTH ? 0 : $health;
         return $this;
     }
 
@@ -75,5 +86,52 @@ class Personnage
     {
         $this->defense = $defense;
         return $this;
+    }
+
+    public function getWinCombat(): int
+    {
+        return $this->winCombat;
+    }
+
+    public function increaseWinCombat(): self
+    {
+        $this->winCombat++;
+
+        return $this;
+    }
+
+    public function decreaseWinCombat(): self
+    {
+        $this->winCombat--;
+
+        if ($this->winCombat == 0) {
+            $this->winCombat = 0;
+        }
+
+        return $this;
+    }
+
+    private function increaseLevel(?string $type = null): void
+    {
+        if (self::ATTACK_ACTION_KEY === $type) {
+            $this->level += 2;
+        } elseif (self::DEFENSE_ACTION_KEY === $type) {
+            $this->level += 3;
+        } else {
+            $this->level += 1;
+        }
+
+        if ($this->level > self::MAX_LEVEL) {
+            $this->level = self::MAX_LEVEL;
+        }
+    }
+
+    private function decreaseLevel(): void
+    {
+        $this->level--;
+
+        if ($this->level < self::MIN_LEVEL) {
+            $this->level = self::MIN_LEVEL;
+        }
     }
 }
