@@ -1,11 +1,16 @@
 <?php
 
-use App\Repository\ArticleRepository;
+use App\Routing\Router;
 
 require_once 'vendor/autoload.php';
 
-$articleManager = new ArticleRepository();
+$router = new Router($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
-foreach ($articleManager->findAll() as $article) {
-    echo $article->title . '<br>';
-}
+// /homepage/action -> App\Controller\HomepageController::action
+// /mon-super/action -> App\Controller\MonSuperController::action
+// /users/admin/action -> App\Controller\Users\AdminController::action
+
+$data = $router->render();
+$page = $data['page'];
+
+require_once 'views/base.php';
