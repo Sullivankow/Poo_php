@@ -20,4 +20,13 @@ class ArticleRepository
 
         return $query->fetch(PDO::FETCH_OBJ);
     }
+
+    public function create(string $title, string $content): bool
+    {
+        $query = DbConnection::getPDO()->prepare('insert into article(title, content) values(:title, :content)');
+        $query->bindParam('title', $title);
+        $query->bindParam('content', $content);
+
+        return $query->execute();
+    }
 }
