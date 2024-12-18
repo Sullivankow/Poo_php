@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-class HomepageController
+class HomepageController extends AbstractController
 {
     public function index(): array
     {
-
         return [
             'page' => 'index',
             'title' => 'Homepage',

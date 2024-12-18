@@ -66,6 +66,9 @@ class Router
                 $data = $controller->{$this->controllerMethod}();
             }
 
+            $data['success_message'] = $controller->getFlash('success_message');
+            $data['error_message'] = $controller->getFlash('error_message');
+
             return $data;
         }
 
@@ -74,12 +77,12 @@ class Router
 
             } else {
                 $postedData = $_POST;
-                $redirectUri = $controller->{$this->controllerMethod}($postedData);
+                $controller->{$this->controllerMethod}($postedData);
+
+                if ($controller->getRedirectUri()) {
+                    header('Location: '.$controller->getRedirectUri());
+                }
             }
-
-            header('Location: '.$redirectUri);
-
-            return null;
         }
 
         throw new \Exception('HTTP method not allowed');

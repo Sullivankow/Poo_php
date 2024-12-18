@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     public function list()
     {
@@ -33,12 +33,12 @@ class ArticleController
             $articleRepository = new ArticleRepository();
 
             if ($articleRepository->create($postedData['title'], $postedData['content'])) {
-                // message de succes
+                $this->addFlash('success_message', 'Article créé');
             } else {
-                // message d'erreur
+                $this->addFlash('error_message', 'Une erreur est survenue');
             }
 
-            header('Location:/article/list');
+            return $this->redirectToUri('/article/list');
         }
 
          return [
