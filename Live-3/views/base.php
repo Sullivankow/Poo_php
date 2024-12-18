@@ -12,7 +12,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Accueil</a></li>
-                    <li><a href="/ma-page">Ma page</a></li>
+                    <li><a href="/article/list">Liste des articles</a></li>
                 </ul>
             </nav>
         </header>
