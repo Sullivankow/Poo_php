@@ -29,4 +29,14 @@ class ArticleRepository
 
         return $query->execute();
     }
+
+    public function update(object $article): bool
+    {
+        $query = DbConnection::getPDO()->prepare('update article set title=:title, content=:content where id = :id');
+        $query->bindParam('title', $article->title);
+        $query->bindParam('content', $article->content);
+        $query->bindParam('id', $article->id);
+
+        return $query->execute();
+    }
 }

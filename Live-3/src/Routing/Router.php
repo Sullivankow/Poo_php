@@ -73,18 +73,20 @@ class Router
         }
 
         if ('POST' === $this->requestMethod) {
+            $postedData = $_POST;
+
             if ($this->parameter) {
-
+                $controller->{$this->controllerMethod}($this->parameter, $postedData);
             } else {
-                $postedData = $_POST;
                 $controller->{$this->controllerMethod}($postedData);
+            }
 
-                if ($controller->getRedirectUri()) {
-                    header('Location: '.$controller->getRedirectUri());
-                }
+            if ($controller->getRedirectUri()) {
+                header('Location: '.$controller->getRedirectUri());
             }
         }
 
+        var_dump($_SERVER['REQUEST_METHOD']);
         throw new \Exception('HTTP method not allowed');
     }
 }

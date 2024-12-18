@@ -45,4 +45,32 @@ class ArticleController extends AbstractController
             'page' => 'articles/create',
         ];
     }
+
+    public function edit(int $id, ?array $postedData = null)
+    {
+        $articleRepository = new ArticleRepository();
+        $article = $articleRepository->find($id);
+
+        if ($postedData) {
+            //from POST method
+            $articleRepository = new ArticleRepository();
+
+            $article->title = $postedData['title'];
+            $article->content = $postedData['content'];
+
+
+            if ($articleRepository->update($article)) {
+                $this->addFlash('success_message', 'Article mis à jour');
+            } else {
+                $this->addFlash('error_message', 'Une erreur est survenue');
+            }
+
+            return $this->redirectToUri('/article/show/'.$id);
+        }
+
+         return [
+            'page' => 'articles/edit',
+            'article' => $articleRepository->find($id),
+        ];
+    }
 }
