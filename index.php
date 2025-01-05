@@ -2,11 +2,13 @@
 
 /////OBJECT 
 
+require_once "Mage.php";
+require_once "Chevalier.php";
+require_once "Archer.php";
 
-require_once "Personnage.php";
 
-$merlin = new Personnage('Merlin', 100, 5, 80,);
-$arthur = new Personnage('Arthur', 100, 80, 10, 100);
+$merlin = new Mage('Merlin', 100, 5, 80,);
+$arthur = new Chevalier('Arthur', 100, 80, 10, 100);
 
 // $merlin->attack('Arthur');
 

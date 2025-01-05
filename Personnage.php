@@ -173,7 +173,7 @@ class Personnage
 
     //Fonction pour augmenter le niveau des personnages
 
-    private function increaseLevel(?string $type = null): void
+    protected function increaseLevel(?string $type = null): void
     {
         if (self::ATTACK_ACTION_KEY === $type) {
             $this->level += 2;
