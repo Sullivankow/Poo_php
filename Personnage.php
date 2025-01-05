@@ -5,10 +5,10 @@ class Personnage
 
     public function __construct(
         private string $name,
-        private int $level,
         private int $health,
         private int $attack,
-        private int $defense
+        private int $defense,
+        private int $level = 1
     ) {}
 
 
@@ -19,16 +19,22 @@ class Personnage
     }
 
 
+
+
+
     //Si l'attaque est au dessus de 50, il gagne un niveau sinon il perd un niveau 
-    public function attack(string $name)
+    public function attack(Personnage $enemy)
     {
-        $enemyDefense = rand(0, 100);
-        if ($this->attack > $enemyDefense) {
-            $this->level++;
+
+        if ($this->attack > $enemy->getDefense()) {
+            $enemy->setHealth($enemy->getHealth() - ($this->attack - $enemy->getDefense())); //100 - (20 - 10), on récupère la santé de l'ennemi qui est de 100, - la différence entre l'attaque de notre personnage et la défense de l'ennemi
         } else {
-            $this->level--;
+            $this->setHealth($this->getHealth() - ($enemy->getDefense() - $this->attack)); // On récuère la santé de notre personnage - la différence entre la défense de l'ennemi et notre personnage
         }
     }
+
+
+
 
 
 
@@ -74,7 +80,7 @@ class Personnage
      */
     public function setHealth(int $health): self
     {
-        $this->health = $health;
+        $this->health = $health < 0 ? 0 : $health;
 
         return $this;
     }
