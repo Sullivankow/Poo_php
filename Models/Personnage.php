@@ -49,10 +49,10 @@ class Personnage
         } else {
             $this->setHealth($this->getHealth() - ($enemy->getDefense() - $this->attack)); // On récuère la santé de notre personnage - la différence entre la défense de l'ennemi et notre personnage
             $this->decreaseLevel();
-            $enemy->increaseLevel();
+            $enemy->increaseLevel(self::DEFENSE_ACTION_KEY);
 
             $this->decreaseWinCombat(); //Notre personnage perd, l'ennemi gagne
-            $enemy->increaseWinCombat(self::DEFENSE_ACTION_KEY);
+            $enemy->increaseWinCombat();
         }
     }
 
