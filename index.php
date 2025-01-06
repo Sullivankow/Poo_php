@@ -3,6 +3,11 @@
 require_once "Database/DbConnection.php";
 
 
-$dbConnection = new DbConnection();
+$dbConnection = DbConnection::getInstance();
+$dbConnection = DbConnection::getInstance();
+$dbConnection = DbConnection::getInstance();
+$dbConnection = DbConnection::getInstance();
+$dbConnection = DbConnection::getInstance();
 
-$pdo = $dbConnection->getPDO();
+
+$dbConnection->getPDO()->query('SELECT * from genre');
