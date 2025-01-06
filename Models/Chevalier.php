@@ -1,5 +1,5 @@
 <?php
 
 
-require_once "Models/Personnage.php";
+require_once "Personnage.php";
 class Chevalier extends Personnage {}

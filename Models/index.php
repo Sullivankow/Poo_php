@@ -2,9 +2,10 @@
 
 /////OBJECT 
 
-require_once "Models/Mage.php";
-require_once "Models/Chevalier.php";
-require_once "Models/Archer.php";
+require_once "Archer.php";
+require_once "Chevalier.php";
+require_once "Mage.php";
+
 
 
 $merlin = new Mage('Merlin', 100, 5, 80,);
