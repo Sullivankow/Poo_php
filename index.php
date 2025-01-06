@@ -2,17 +2,16 @@
 
 require_once "vendor/autoload.php";
 
-use App\Database\DbConnection;
+use App\Genre\GenreManager;
+
+$genreManager = new GenreManager();
+$genres = $genreManager->findAll();
 
 
-try {
-    $dbConnexion = DbConnection::getInstance();
-    $pdo = $dbConnexion->getPDO();
-    echo "Connexion réussie à la base de données ! 🎉";
-} catch (Exception $e) {
-    echo "Erreur : " . $e->getMessage();
+foreach ($genres as $genre) {
+
+    echo $genre->name . '<br>';
 }
-
 
 
 
