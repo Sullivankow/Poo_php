@@ -2,5 +2,10 @@
     "name": "deszm/studi-phpoo-nomvember-24",
     "description": "cours sur la poo php",
     "type": "project",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            " App\\": "src/"
+        }
+    }
 }
