@@ -4,6 +4,8 @@
 
 namespace App\Database;
 
+use PDO;
+
 class DbConnection
 {
 
@@ -15,11 +17,8 @@ class DbConnection
 
     public function __construct()
     {
-        try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=studi_moviz_poo;port=3306', 'root', '');
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage());
-        }
+
+        $this->pdo = new PDO('mysql:host=localhost;dbname=studi_moviz_poo;port=3306', 'root', '');
     }
 
 
